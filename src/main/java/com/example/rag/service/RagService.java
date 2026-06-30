@@ -10,7 +10,7 @@ import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.embedding.EmbeddingModel;
-import dev.langchain4j.model.embedding.onnx.allminilml6v2.AllMiniLmL6V2EmbeddingModel;
+import dev.langchain4j.model.googleai.GoogleAiEmbeddingModel;
 import dev.langchain4j.model.googleai.GoogleAiGeminiChatModel;
 import dev.langchain4j.store.embedding.EmbeddingMatch;
 import dev.langchain4j.store.embedding.EmbeddingStore;
@@ -35,9 +35,13 @@ public class RagService {
     public RagService(@Value("${DB_HOST}") String dbHost,
                       @Value("${DB_USERNAME}") String dbUser,
                       @Value("${DB_PASSWORD}") String dbPassword,
-                      @Value("${DB_NAME}") String dbName) {
-        this.embeddingModel = new AllMiniLmL6V2EmbeddingModel();
-        
+                      @Value("${DB_NAME}") String dbName,
+                      @Value("${GOOGLE_API_KEY}") String googleApiKey) {
+        this.googleApiKey = googleApiKey;
+        this.embeddingModel = GoogleAiEmbeddingModel.builder()
+                .apiKey(googleApiKey)
+                .modelName("text-embedding-004")
+                .build();
         // Use default port 5432
         this.embeddingStore = PgVectorEmbeddingStore.builder()
                 .host(dbHost)
@@ -45,8 +49,8 @@ public class RagService {
                 .database(dbName)
                 .user(dbUser)
                 .password(dbPassword)
-                .table("embeddings")
-                .dimension(384)
+                .table("embeddings_gemini")
+                .dimension(768)
                 .build();
     }
 
