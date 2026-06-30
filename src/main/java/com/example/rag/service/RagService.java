@@ -40,7 +40,7 @@ public class RagService {
         this.googleApiKey = googleApiKey;
         this.embeddingModel = GoogleAiEmbeddingModel.builder()
                 .apiKey(googleApiKey)
-                .modelName("text-embedding-004")
+                .modelName("embedding-001")
                 .build();
         // Use default port 5432
         this.embeddingStore = PgVectorEmbeddingStore.builder()
