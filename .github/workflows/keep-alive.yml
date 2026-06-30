@@ -13,5 +13,5 @@ jobs:
       - name: Ping Health Endpoint
         # Replace the URL below with your actual Render URL!
         run: |
-          curl -sS https://rag-backend-avxg.onrender.com
+          curl -sS https://rag-backend-avxg.onrender.com/api/health
           echo "Ping successful!"
