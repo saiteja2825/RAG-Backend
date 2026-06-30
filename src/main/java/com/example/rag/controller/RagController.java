@@ -1,8 +1,12 @@
 package com.example.rag.controller;
 
+import com.example.rag.entity.User;
+import com.example.rag.repository.UserRepository;
 import com.example.rag.service.RagService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,24 +16,34 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api")
 public class RagController {
 
     private final RagService ragService;
+    private final UserRepository userRepository;
 
-    public RagController(RagService ragService) {
+    public RagController(RagService ragService, UserRepository userRepository) {
         this.ragService = ragService;
+        this.userRepository = userRepository;
+    }
+
+    private User getAuthenticatedUser() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userRepository.findByUsername(userDetails.getUsername()).orElseThrow();
     }
 
     @PostMapping("/upload")
     public ResponseEntity<Map<String, String>> uploadPdf(@RequestParam("file") MultipartFile file) {
         try {
+            User user = getAuthenticatedUser();
+            
             // Save uploaded file temporarily
             File tempFile = File.createTempFile("uploaded-", ".pdf");
             file.transferTo(tempFile);
             Path tempFilePath = tempFile.toPath();
 
             // Process PDF with LangChain4j equivalent
-            ragService.processPdf(tempFilePath);
+            ragService.processPdf(tempFilePath, user.getId());
 
             // Cleanup
             tempFile.delete();
@@ -48,7 +62,8 @@ public class RagController {
     @PostMapping("/chat")
     public ResponseEntity<Map<String, String>> chatWithPdf(@RequestBody ChatRequest request) {
         try {
-            String reply = ragService.chat(request.getQuery());
+            User user = getAuthenticatedUser();
+            String reply = ragService.chat(request.getQuery(), user.getId());
 
             Map<String, String> response = new HashMap<>();
             response.put("reply", reply);

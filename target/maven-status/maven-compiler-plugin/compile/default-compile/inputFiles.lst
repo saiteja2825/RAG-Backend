@@ -1,5 +1,15 @@
 C:\Users\comra\OneDrive\Documents\Desktop\Rag_project\spring-backend\src\main\java\com\example\rag\config\CorsConfig.java
+C:\Users\comra\OneDrive\Documents\Desktop\Rag_project\spring-backend\src\main\java\com\example\rag\config\DataInitializer.java
+C:\Users\comra\OneDrive\Documents\Desktop\Rag_project\spring-backend\src\main\java\com\example\rag\controller\AdminController.java
+C:\Users\comra\OneDrive\Documents\Desktop\Rag_project\spring-backend\src\main\java\com\example\rag\controller\AuthController.java
 C:\Users\comra\OneDrive\Documents\Desktop\Rag_project\spring-backend\src\main\java\com\example\rag\controller\ChatRequest.java
 C:\Users\comra\OneDrive\Documents\Desktop\Rag_project\spring-backend\src\main\java\com\example\rag\controller\RagController.java
+C:\Users\comra\OneDrive\Documents\Desktop\Rag_project\spring-backend\src\main\java\com\example\rag\entity\Role.java
+C:\Users\comra\OneDrive\Documents\Desktop\Rag_project\spring-backend\src\main\java\com\example\rag\entity\User.java
 C:\Users\comra\OneDrive\Documents\Desktop\Rag_project\spring-backend\src\main\java\com\example\rag\RagApplication.java
+C:\Users\comra\OneDrive\Documents\Desktop\Rag_project\spring-backend\src\main\java\com\example\rag\repository\UserRepository.java
+C:\Users\comra\OneDrive\Documents\Desktop\Rag_project\spring-backend\src\main\java\com\example\rag\security\CustomUserDetailsService.java
+C:\Users\comra\OneDrive\Documents\Desktop\Rag_project\spring-backend\src\main\java\com\example\rag\security\JwtAuthenticationFilter.java
+C:\Users\comra\OneDrive\Documents\Desktop\Rag_project\spring-backend\src\main\java\com\example\rag\security\JwtService.java
+C:\Users\comra\OneDrive\Documents\Desktop\Rag_project\spring-backend\src\main\java\com\example\rag\security\SecurityConfig.java
 C:\Users\comra\OneDrive\Documents\Desktop\Rag_project\spring-backend\src\main\java\com\example\rag\service\RagService.java
