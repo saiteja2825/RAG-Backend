@@ -15,5 +15,5 @@ WORKDIR /app
 EXPOSE 8080
 # Copy the built JAR from the build stage
 COPY --from=build /app/target/*.jar app.jar
-# Command to run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Command to run the application with increased heap size to fit the ONNX model in Render's 512MB limit
+ENTRYPOINT ["java", "-Xmx400m", "-jar", "app.jar"]
