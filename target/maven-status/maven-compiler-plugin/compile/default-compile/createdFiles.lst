@@ -1,0 +1,6 @@
+com\example\rag\controller\RagController.class
+com\example\rag\RagApplication.class
+com\example\rag\service\RagService.class
+com\example\rag\controller\ChatRequest.class
+com\example\rag\config\CorsConfig.class
+com\example\rag\config\CorsConfig$1.class
